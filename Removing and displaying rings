@@ -1,0 +1,161 @@
+class Node: 
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class Linked:
+    def __init__(self):
+        self.head = None 
+    
+    def Index(self,index):
+        current_node = self.head
+        position = 0
+        while current_node is not None and position != index:
+            position += 1
+            current_node = current_node.next
+        return current_node
+
+                
+
+
+
+    def insertAtBegin(self, data):
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+            return
+        else:
+            new_node.next = self.head
+            self.head = new_node
+
+    def insertAtIndex(self, data, index):
+            new_node = Node(data)
+            current_node = self.head
+            position = 0
+            if position == index:
+                self.insertAtBegin(data)
+            else:
+                while(current_node != None and position+1 != index):
+                    position = position+1
+                    current_node = current_node.next
+    
+                if current_node != None:
+    
+                    new_node.next = current_node.next
+                    current_node.next = new_node
+                else:
+                    print("Index not present")
+
+    def insertAtEnd(self, data):
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+            return
+    
+        current_node = self.head
+        while(current_node.next):
+            current_node = current_node.next
+    
+        current_node.next = new_node
+
+    def updateNode(self, val, index):
+        current_node = self.head
+        position = 0
+        if position == index:
+            current_node.data = val
+        else:
+            while(current_node != None and position != index):
+                position = position+1
+                current_node = current_node.next
+    
+            if current_node != None:
+                current_node.data = val
+            else:
+                print("Index not present")
+
+    def remove_first_node(self):
+        if(self.head == None):
+            return
+        
+        self.head = self.head.next
+    
+    def print_heights(self):
+        current = self.head
+        while current:
+            Rings = current.data
+            Rings()
+            current = current.next
+
+    def print_heights(self):
+        current = self.head
+        while current:
+            Rings = current.data
+            Rings()
+            current = current.next
+
+
+def ring_Blue():
+    print("\033[1;34;40m           /¯¯¯¯¯¯\ ","\033[0;0;0m")
+    print("\033[1;34;40m          /________\ ","\033[0;0;0m")
+
+def ring_Red():
+    print("\033[1;31;40m         /¯¯¯¯¯¯¯¯¯¯\ ","\033[0;0;0m")
+    print("\033[1;31;40m        /____________\ ","\033[0;0;0m")
+
+def ring_Green():
+    print("\033[1;32;40m       /¯¯¯¯¯¯¯¯¯¯¯¯¯¯\ ","\033[0;0;0m")
+    print("\033[1;32;40m      /________________\ ","\033[0;0;0m")
+    
+def ring_Orange():
+    print("\033[1;36;40m     /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\ ","\033[0;0;0m")
+    print("\033[1;36;40m    /____________________\ ","\033[0;0;0m")
+
+def ring_Yellow():
+    print("\033[1;33;40m   /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\ ","\033[0;0;0m")
+    print("\033[1;33;40m  /________________________\ ", "\033[0;0;0m")
+
+def base():
+    print("\033[1;30;40m ||||||||||||||||||||||||||||")
+
+def pillar():
+    print("\033[1:30:40m             ||||")
+
+stack = [pillar,ring_Blue,ring_Red,ring_Green,ring_Orange,ring_Yellow,base ]
+'''[for x in range(len(stack)):
+    stack[x]()'''
+Stacked = Linked()
+for y in range(len(stack)):
+            Stacked.insertAtEnd(stack[y])
+'''
+Stacked.print_heights()
+current_node = Stacked.head
+index = 0
+while current_node is not None:
+    Stacked.updateNode(pillar, index)
+    current_node = current_node.next
+    index += 1
+    Stacked.updateNode(base, 6)
+
+Stacked.print_heights()
+'''
+def choice():
+    ringAvailable = []
+    x = 1
+    while True:
+        while (x!=7):
+            Stacked.print_heights()
+            OP = input("1. To remove a ring\n2. To add a ring\n")
+            if (OP =="1" and x <= 6):
+                Availring = Stacked.Index(x)
+                ringAvailable.insert(0, Availring.data)
+                Stacked.updateNode(pillar,x)
+                x= x+1
+            if (OP =="1" and x == 6):
+                print("Can not remove any more rings.")
+            elif (OP =="2"):
+                print("The available rings are:")
+                for y in range(len(ringAvailable)):
+                    ringAvailable[y]()
+                
+
+choice()
